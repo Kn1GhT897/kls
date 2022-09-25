@@ -19,6 +19,12 @@ fn main() {
 
     let vector = DirVecBuilder::build_vec(options, path);
 
-    Output::output(vector);
+    match vector {
+        Ok(item) => Output::output(item),
+        Err(e) => {
+            println!("{}", e.to_string());
+            return
+        }
+    }
 
 }

@@ -11,9 +11,11 @@ impl DirVecBuilder {
     }
 
 
-    pub fn build_vec(options: String, path: &Path) -> Vec<DirEntry> {
-        let files = read_dir(path).unwrap();
-
+    pub fn build_vec(options: String, path: &Path) -> Result<Vec<DirEntry>, std::io::Error> {
+        let files = match read_dir(path) {
+            Ok(item) => item,
+            Err(e) => return Err(e),
+        };
         let mut result: Vec<DirEntry> = vec![];
 
         if !DirVecBuilder::check_show_all(options.clone()) {
@@ -31,6 +33,7 @@ impl DirVecBuilder {
             }
         }
 
-        result
+        Ok(result)
     }
+
 }

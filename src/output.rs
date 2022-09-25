@@ -2,7 +2,6 @@ use std::fs::{DirEntry};
 pub struct Output;
 
 impl Output {
-    
     fn print_file(file: String) {
         print!("{}\t", file);
     }
